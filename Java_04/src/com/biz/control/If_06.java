@@ -8,9 +8,9 @@ public class If_06 {
 		
 		Random rnd = new Random();
 		
-		int intKor = rnd.nextInt(100) +1;
-		int intEng = rnd.nextInt(100) +1;
-		int intMath = rnd.nextInt(100) +1;
+		int intKor = rnd.nextInt(50) + 51;
+		int intEng = rnd.nextInt(50) + 51;
+		int intMath = rnd.nextInt(50) + 51;
 		
 		int sum = intKor+intEng+intMath;
 		int avg = sum/3;
@@ -25,6 +25,7 @@ public class If_06 {
 		} else {
 			System.out.println("불합격");
 		}
+		
 	}
 
 }
