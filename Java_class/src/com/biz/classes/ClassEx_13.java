@@ -1,6 +1,7 @@
 package com.biz.classes;
 
 import com.biz.classes.model.BankVO;
+import com.biz.classes.service.BankService;
 
 public class ClassEx_13 {
 	public static void main(String[] args) {
@@ -29,6 +30,9 @@ public class ClassEx_13 {
 		bankList[1].setIntOutput(1000);
 		bankList[3].setIntOutput(1000);
 		bankList[4].setIntOutput(1000);
+		
+		BankService bankService = new BankService();
+		bankService.bankList(bankList);
+		
 	}
-	
 }

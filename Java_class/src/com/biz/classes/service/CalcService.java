@@ -28,17 +28,17 @@ public class CalcService {
 	public int prime(int num1, int num2) {
 		int sum = 0;
 		
-		for(int i = num1; i<num2; i++) {
-			int index =0;			
-			for(index = i; index<num2; index++) {
+		for(int i = num1; i<=num2; i++) {
+			int index;			
+			for(index = 2; index<num2; index++) {
 				
 				if(i%index ==  0) {
 					break;
 				}
 			}
 			
-			if(index == num2) {
-				sum+=i;
+			if(index ==i) {
+				sum+=index;
 			}
 		}
 		return sum;

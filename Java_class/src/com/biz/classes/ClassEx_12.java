@@ -29,8 +29,6 @@ public class ClassEx_12 {
 		bankList[3].setIntOutput(1000);
 		bankList[4].setIntOutput(1000);
 		
-		
-		
 	}
 
 }
