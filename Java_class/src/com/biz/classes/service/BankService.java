@@ -20,7 +20,12 @@ public class BankService {
 		}
 		
 		for(int i=0; i<bankList.length; i++) {
-			System.out.printf("%s\t%s\t%d\t%d\t%d\n",bankList[i].getStrNum(),bankList[i].getStrDate(),bankList[i].getIntInput(),bankList[i].getIntOutput(),bankList[i].getIntValance());
+			System.out.printf("%s\t%s\t%d\t%d\t%d\n",
+					bankList[i].getStrNum(),
+					bankList[i].getStrDate(),
+					bankList[i].getIntInput(),
+					bankList[i].getIntOutput(),
+					bankList[i].getIntValance());
 		}
 		
 		
