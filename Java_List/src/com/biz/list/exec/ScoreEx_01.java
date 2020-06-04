@@ -57,10 +57,10 @@ public class ScoreEx_01 {
 		int scoreSize = scoreList.size();
 		for(int i = 0; i<scoreSize; i++) {
 			getScore = scoreList.get(i);
-			System.out.print(num+ "\t");
-			System.out.print(kor+ "\t");
-			System.out.print(eng+ "\t");
-			System.out.println(math + "\t");
+			System.out.print(getScore.getNum()+ "\t");
+			System.out.print(getScore.getKor()+ "\t");
+			System.out.print(getScore.getEng()+ "\t");
+			System.out.println(getScore.getMath() + "\t");
 		}
 		
 	}
