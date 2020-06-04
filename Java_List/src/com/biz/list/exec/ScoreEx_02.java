@@ -6,6 +6,7 @@ import java.util.Random;
 
 import com.biz.list.model.ScoreVO;
 import com.biz.list.service.ScoreServiceV1;
+import com.biz.list.service.ScoreServiceV2;
 
 public class ScoreEx_02 {
 	public static void main(String[] args) {
@@ -31,6 +32,12 @@ public class ScoreEx_02 {
 		ScoreServiceV1 sService = new ScoreServiceV1();
 		sService.scoreList(scoreList);
 		
+		
+		ScoreServiceV2 sService2 = new ScoreServiceV2();
+		sService2.setScoreList(scoreList);
+		sService2.stSum();
+		sService2.stAvg();
+		sService2.scoreList();
 		
 	}
 
