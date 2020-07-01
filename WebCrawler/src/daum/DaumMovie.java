@@ -44,8 +44,8 @@ public class DaumMovie {
 			}
 			page += 1;
 		}
-
+		
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		System.out.printf("총 %d 건을 수집하였습니다.", cnt);
+		System.out.printf("총 %d 건을 수집하였습니다.",cnt);
 	}
 }
