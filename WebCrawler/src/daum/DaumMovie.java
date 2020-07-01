@@ -24,7 +24,7 @@ public class DaumMovie {
 
 			Elements replyList = doc.select("div.review_info");
 
-			if (replyList.size() == -1) {
+			if (replyList.size() <= 0) {
 				break;
 			}
 
@@ -32,7 +32,7 @@ public class DaumMovie {
 				writer = reply.select("em.link_profile").text();
 				score = Integer.parseInt(reply.select("em.emph_grade").text());
 				review = reply.select("p.desc_review").text();
-				regDt = reply.select("span.info_append").text();
+				regDt = reply.select("span.info_append").text().substring(0,10);
 
 				System.out.println(
 						"■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");

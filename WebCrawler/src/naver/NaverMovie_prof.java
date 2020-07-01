@@ -34,7 +34,7 @@ public class NaverMovie_prof {
 				content = one.select("div.score_reple > p > span").get(0).text();
 				writer = one.select("div.score_reple a > span").get(0).text();
 				score = Integer.parseInt(one.select("div.star_score > em").get(0).text()); // mongoDB를 통해 평균을 구할 수 있다. 따라서 정수형으로 변환시켜준다.
-				regDt = one.select("div.score_reple em").get(1).text();
+				regDt = one.select("div.score_reple em").get(1).text().substring(0,10);
 				
 				System.out.println(
 						"■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");

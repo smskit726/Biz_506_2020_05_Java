@@ -1,6 +1,6 @@
 package daum;
 
-import java.io.IOException;import java.security.acl.LastOwnerException;
+import java.io.IOException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
