@@ -1,11 +1,11 @@
-package com.biz.score.exec;
+package com.biz.score;
 
-import com.biz.score.service.ScoreService01;
+import com.biz.score.service.ScoreService02;
 
-public class ScoreEx_01 {
+public class ScoreMain2 {
 	public static void main(String[] args) {
 		
-		ScoreService01 sService = new ScoreService01();
+		ScoreService02 sService = new ScoreService02();
 		
 		while(true) {
 			if(!sService.inputScore()) {

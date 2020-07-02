@@ -17,7 +17,6 @@ public class ScoreService01 {
 	
 	public boolean inputScore() {
 		
-		int intID=0;
 		int intKor=0;
 		int intEng=0;
 		int intMath=0;
@@ -29,49 +28,71 @@ public class ScoreService01 {
 			return false;
 		}
 		
-		try {
-			intID = Integer.valueOf(strID);
+		while(true) {
+			System.out.println("국어 >> ");
+			String strKor = scan.nextLine();
 			
-		} catch (Exception e) {
-			System.out.println(">> 숫자만 입력 가능합니다 :)");
+			try {
+				intKor = Integer.valueOf(strKor);
+			} catch (Exception e) {
+				System.out.println(">> 0 ~ 100 사이의 숫자를 입력해주세요");
+				System.out.println(">> 입력값이 잘못되어 0으로 임시 저장합니다.");
+			}
+			
+			if(intKor>=0 && intKor<=100) {
+				break;
+			}else {
+				System.out.println(">> 0 ~ 100 사이의 숫자를 입력해주세요");
+			}
 		}
 		
-		System.out.println("국어 >> ");
-		String strKor = scan.nextLine();
-		
-		try {
-			intKor = Integer.valueOf(strKor);
-		} catch (Exception e) {
-			System.out.println(">> 0 ~ 100 사이의 숫자를 입력해주세요");
+		while(true) {
+			System.out.println("영어 >> ");
+			String strEng = scan.nextLine();
+			
+			try {
+				intEng = Integer.valueOf(strEng);
+			} catch (Exception e) {
+				System.out.println(">> 0 ~ 100 사이의 숫자를 입력해주세요");
+				System.out.println(">> 입력값이 잘못되어 0으로 임시 저장합니다.");
+			}
+			
+			if(intEng>=0 && intEng<=100) {
+				break;
+			}else {
+				System.out.println(">> 0 ~ 100 사이의 숫자를 입력해주세요");
+			}
 		}
 		
-		System.out.println("영어 >> ");
-		String strEng = scan.nextLine();
-		
-		try {
-			intEng = Integer.valueOf(strEng);
-		} catch (Exception e) {
-			System.out.println(">> 0 ~ 100 사이의 숫자를 입력해주세요");
-		}
-		
-		System.out.println("수학 >> ");
-		String strMath = scan.nextLine();
-		
-		try {
-			intMath = Integer.valueOf(strMath);
-		} catch (Exception e) {
-			System.out.println(">> 0 ~ 100 사이의 숫자를 입력해주세요");
+		while(true) {
+			System.out.println("수학 >> ");
+			String strMath = scan.nextLine();
+			
+			try {
+				intMath = Integer.valueOf(strMath);
+			} catch (Exception e) {
+				System.out.println(">> 0 ~ 100 사이의 숫자를 입력해주세요");
+				System.out.println(">> 입력값이 잘못되어 0으로 임시 저장합니다.");
+			}
+			
+			if(intMath>=0 && intMath<=100) {
+				break;
+			}else {
+				System.out.println(">> 0 ~ 100 사이의 숫자를 입력해주세요");
+			}
 		}
 		
 		ScoreVO scoreVO = new ScoreVO();
-		scoreVO.setStID(intID);
+		scoreVO.setStID(strID);
 		scoreVO.setIntKor(intKor);
 		scoreVO.setIntEng(intEng);
 		scoreVO.setIntMath(intMath);
 		
 		int stSum = intKor+intEng+intMath;
 		scoreVO.setIntSum(stSum);
-		scoreVO.setIntAvg(stSum/3);
+		
+		float stAvg = (float)stSum/3;
+		scoreVO.setFloatAvg(stAvg);
 		
 		scoreList.add(scoreVO);
 		
@@ -95,7 +116,7 @@ public class ScoreService01 {
 			System.out.print(score.getIntEng()+"\t");
 			System.out.print(score.getIntMath()+"\t");
 			System.out.print(score.getIntSum()+"\t");
-			System.out.print(score.getIntAvg()+"\n");
+			System.out.print(score.getFloatAvg()+"\n");
 		}
 		System.out.println(line.do_line(lineLength));
 	}
