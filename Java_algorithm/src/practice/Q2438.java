@@ -15,12 +15,13 @@ public class Q2438 {
 				break;
 			}
 		}
-		
-		for(int i=0; i<num; i++) {
+		int i = 0;
+		for(i=0; i<num; ++i) {
 			for(int j=0; j<=i; j++) {
 				System.out.print("*");
 			}
 			System.out.println();	
 		}
+		System.out.println(i);
 	}
 }
