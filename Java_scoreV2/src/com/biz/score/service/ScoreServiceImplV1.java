@@ -8,7 +8,7 @@ import com.biz.score.domain.ScoreVO;
 
 /*
  * ScoreService**** 클래스를 정의할때
- * 반드시 ScoreService interface를 참조(implements)하도록 규칙   을 정해 놓는다.
+ * 반드시 ScoreService interface를 참조(implements)하도록 규칙을 정해 놓는다.
  * ScoreService interface를 참조하는 클래스는 ScoreService interface에 디자인된 method를
  * 모두 implement해서 작성되어야 하는 규칙이 작동하게 된다.
  * 따라서 모든 method의 이름이 통일되는 효과를 얻게된다.
