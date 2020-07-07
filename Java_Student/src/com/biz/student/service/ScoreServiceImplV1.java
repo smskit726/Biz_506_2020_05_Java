@@ -8,6 +8,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.biz.student.config.SplitPos;
 import com.biz.student.domain.Score;
 import com.biz.student.domain.Student;
 
@@ -16,8 +17,8 @@ public class ScoreServiceImplV1 implements ScoreService{
 	protected List<Score> scoreList;
 	
 	public ScoreServiceImplV1() {
-		studentList = new ArrayList();
-		scoreList = new ArrayList();
+		studentList = new ArrayList<Student>();
+		scoreList = new ArrayList<Score>();
 	}
 
 	@Override
@@ -44,9 +45,8 @@ public class ScoreServiceImplV1 implements ScoreService{
 				String[] student = reader.split(":");
 				Student stdVO = new Student();
 				
-				stdVO.setNum(student[0]);
-				stdVO.setName(student[1]);
-				
+				stdVO.setNum(student[SplitPos.STUDENT.ST_NUM]);
+				stdVO.setName(student[SplitPos.STUDENT.ST_NAME]);
 				studentList.add(stdVO);
 			}
 			buffer.close();
@@ -54,9 +54,12 @@ public class ScoreServiceImplV1 implements ScoreService{
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			System.out.println(studentFile + " 파일을 읽기 위해 open 하는 중 오류 발생!");
 			e.printStackTrace();
+		}catch(NumberFormatException e) {
+			System.out.println("점수를 숫자로 바꾸는 과정에서 오류 발생!");
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("버퍼로부터 데이터를 읽는데 문제가 발생!");
 		}
 		
 	}
@@ -82,23 +85,24 @@ public class ScoreServiceImplV1 implements ScoreService{
 				String[] score = reader.split(":");
 				Score scoreVO = new Score();
 				
-				scoreVO.setIntKor(Integer.valueOf(score[1]));
-				scoreVO.setIntENG(Integer.valueOf(score[2]));
-				scoreVO.setIntMath(Integer.valueOf(score[3]));
-				scoreVO.setIntSum(Integer.valueOf(score[4]));
-				scoreVO.setFlaotAvg(Float.valueOf(score[5]));
+				scoreVO.setNum(score[0]);
+				scoreVO.setIntKor(Integer.valueOf(SplitPos.SCORE.SC_KOR));
+				scoreVO.setIntEng(Integer.valueOf(SplitPos.SCORE.SC_ENG));
+				scoreVO.setIntMath(Integer.valueOf(SplitPos.SCORE.SC_MATH));
+				// scoreVO.setIntSum(Integer.valueOf(score[4]));
+				// scoreVO.setFloatAvg(Float.valueOf(score[5]));
 				
 				scoreList.add(scoreVO);
-				
 			}
 			buffer.close();
 			fileReader.close();
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			System.out.println(scoreFile + " 파일을 읽기 위해 open 하는 중 오류 발생!");
 			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("버퍼로부터 데이터를 읽는데 문제가 발생!");
 		}
 		
 	}
@@ -111,27 +115,20 @@ public class ScoreServiceImplV1 implements ScoreService{
 		for(int i=0; i<scoreSize; i++) {
 			Score scoreVO = scoreList.get(i);
 			intSum = scoreVO.getIntKor() + scoreVO.getIntMath() + scoreVO.getIntEng();
-			if(intSum != scoreVO.getIntSum()) {
-				scoreVO.setIntSum(intSum);
-			}
+			scoreVO.setIntSum(intSum);
 		}
-		
 	}
 
 	@Override
 	public void calcAvg() {
 		// TODO Auto-generated method stub
-		DecimalFormat df = new DecimalFormat("0.00");
 		int scoreSize = scoreList.size();
-		int intSum;
+		int subLength = 3; // 과목 수
 		float floatAvg;
 		for(int i=0; i<scoreSize; i++) {
 			Score scoreVO = scoreList.get(i);
-			intSum = scoreVO.getIntKor() + scoreVO.getIntMath() + scoreVO.getIntEng();
-			floatAvg = Float.valueOf(df.format((float)intSum/3));
-			if(floatAvg!=scoreVO.getFlaotAvg()) {
-				scoreVO.setFlaotAvg(floatAvg);
-			}
+			floatAvg = (float)scoreVO.getIntSum()/subLength;
+			scoreVO.setFloatAvg(floatAvg);
 		}
 	}
 
@@ -143,22 +140,27 @@ public class ScoreServiceImplV1 implements ScoreService{
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		System.out.println("학번\t이름\t국어\t영어\t수학\t총점\t평균");
 		System.out.println("〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓");
-		
-		int scoreSize = scoreList.size();
-		Score scoreVO;
-		Student stdVO;
-		
-		for(int i=0; i<scoreSize; i++) {
-			scoreVO = scoreList.get(i);
-			stdVO = studentList.get(i);
+
+		// data의 Join
+		// scoreList, studentList Join해서 데이터를 출력하는 코드
+		for(Score score : scoreList) {
+			System.out.print(score.getNum()+"\t");
 			
-			System.out.print(stdVO.getNum() + "\t");
-			System.out.print(stdVO.getName() + "\t");
-			System.out.print(scoreVO.getIntKor() + "\t");
-			System.out.print(scoreVO.getIntEng() + "\t");
-			System.out.print(scoreVO.getIntMath() + "\t");
-			System.out.print(scoreVO.getIntSum() + "\t");
-			System.out.print(scoreVO.getFlaotAvg() + "\n");
+			// 이름
+			// score의 학번으로 studentList에서 찾기
+			for(Student std : studentList) {
+				
+				// 학번이 같은 학생의 정보를 찾았으면
+				if(score.getNum().equals(std.getNum())) {
+					System.out.print(std.getName()+"\t");
+					break;
+				}
+			}
+			System.out.print(score.getIntKor()+"\t");
+			System.out.print(score.getIntEng()+"\t");
+			System.out.print(score.getIntMath()+"\t");
+			System.out.print(score.getIntSum()+"\t");
+			System.out.printf("%5.2f\n",score.getFloatAvg());
 		}
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 	}
