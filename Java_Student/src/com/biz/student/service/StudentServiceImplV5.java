@@ -18,7 +18,7 @@ public class StudentServiceImplV5 extends StudentServiceImplV2 {
 	public StudentServiceImplV5() {
 		outPut=System.out;
 	}
-
+		
 	@Override
 	public boolean inputStudent() {
 
